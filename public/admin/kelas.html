@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Kelas - LMS SMK Karya Teladan</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-role="admin" data-page="admin-kelas">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand">LMS Karya Teladan</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="guru.html">Data Guru</a>
+        <a href="murid.html">Data Murid</a>
+        <a href="kelas.html" class="active">Kelas</a>
+        <a href="mapel.html" class="">Mata Pelajaran</a>
+        <a href="jadwal.html" class="">Jadwal</a>
+        <a href="presensi.html">Presensi</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="materi.html">Materi</a>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="profil.html">Profil</a>
+        <button type="button" data-logout>Logout</button>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Data Kelas</h1>
+          <p>Kelola data kelas sebagai fondasi akademik LMS.</p>
+        </div>
+        <strong data-user-name>Memuat...</strong>
+      </header>
+      <section class="panel">
+  <div class="section-header">
+    <div>
+      <h2>Daftar Kelas</h2>
+      <p class="muted">Kelola kelas, jurusan, wali kelas, tahun ajaran, dan status kelas.</p>
+    </div>
+    <button class="btn btn-primary btn-auto" type="button" data-open-create>+ Tambah Kelas</button>
+  </div>
+  <div data-alert hidden></div>
+  <div class="toolbar">
+    <input class="form-control" type="search" placeholder="Cari kelas, jurusan, wali kelas..." data-search />
+    <select class="form-control" data-status-filter><option value="">Semua status</option><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select>
+    <button class="btn btn-secondary" type="button" data-refresh>Refresh</button>
+  </div>
+  <p data-loading>Memuat data kelas...</p>
+  <div class="table-wrapper"><table class="data-table"><thead><tr><th>No</th><th>Kelas</th><th>Jurusan</th><th>Wali Kelas</th><th>Jumlah Murid</th><th>Tahun Ajaran</th><th>Status</th><th>Aksi</th></tr></thead><tbody data-kelas-table><tr><td colspan="8">Data belum dimuat.</td></tr></tbody></table></div>
+</section>
+<div class="modal" data-modal hidden><div class="modal-card"><div class="modal-header"><div><h2 data-modal-title>Tambah Kelas</h2><p class="muted">Jumlah murid dihitung otomatis dari data murid aktif di kelas tersebut.</p></div><button class="icon-button" type="button" data-close-modal>×</button></div>
+<form data-kelas-form><input type="hidden" name="id"/><input type="hidden" name="action" value="create"/><div class="form-grid">
+<div class="form-group"><label>Nama Kelas</label><input class="form-control" name="nama_kelas" placeholder="Contoh: XII RPL 1" required/></div>
+<div class="form-group"><label>Jurusan</label><input class="form-control" name="jurusan" placeholder="Contoh: Rekayasa Perangkat Lunak" required/></div>
+<div class="form-group"><label>Wali Kelas</label><select class="form-control" name="wali_kelas_id" data-guru-options><option value="">Pilih wali kelas</option></select></div>
+<div class="form-group"><label>Tahun Ajaran</label><input class="form-control" name="tahun_ajaran" placeholder="2025/2026" required/></div>
+<div class="form-group"><label>Status</label><select class="form-control" name="status"><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select></div>
+</div><div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-modal>Batal</button><button class="btn btn-primary btn-auto" type="submit" data-save-button>Simpan</button></div></form></div></div>
+    </main>
+  </div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/kelas.js"></script>
+</body>
+</html>

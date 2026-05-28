@@ -1,0 +1,14 @@
+.env
+*.log
+Thumbs.db
+.DS_Store
+
+public/assets/uploads/*
+!public/assets/uploads/.gitkeep
+
+storage/materi/*
+!storage/materi/.gitkeep
+storage/profile/*
+!storage/profile/.gitkeep
+storage/tugas/*
+!storage/tugas/.gitkeep

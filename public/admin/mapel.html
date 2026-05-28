@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mata Pelajaran - LMS SMK Karya Teladan</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-role="admin" data-page="admin-mapel">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand">LMS Karya Teladan</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="guru.html">Data Guru</a>
+        <a href="murid.html">Data Murid</a>
+        <a href="kelas.html" class="">Kelas</a>
+        <a href="mapel.html" class="active">Mata Pelajaran</a>
+        <a href="jadwal.html" class="">Jadwal</a>
+        <a href="presensi.html">Presensi</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="materi.html">Materi</a>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="profil.html">Profil</a>
+        <button type="button" data-logout>Logout</button>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Mata Pelajaran</h1>
+          <p>Kelola mata pelajaran yang terhubung dengan guru dan kelas.</p>
+        </div>
+        <strong data-user-name>Memuat...</strong>
+      </header>
+      <section class="panel">
+  <div class="section-header"><div><h2>Daftar Mata Pelajaran</h2><p class="muted">Hubungkan mata pelajaran dengan guru pengajar, kelas, dan semester.</p></div><button class="btn btn-primary btn-auto" type="button" data-open-create>+ Tambah Mapel</button></div>
+  <div data-alert hidden></div>
+  <div class="toolbar-4 toolbar"><input class="form-control" type="search" placeholder="Cari kode, mapel, guru, kelas..." data-search/><select class="form-control" data-kelas-filter><option value="">Semua kelas</option></select><select class="form-control" data-status-filter><option value="">Semua status</option><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select><button class="btn btn-secondary" type="button" data-refresh>Refresh</button></div>
+  <p data-loading>Memuat data mata pelajaran...</p>
+  <div class="table-wrapper"><table class="data-table"><thead><tr><th>No</th><th>Kode</th><th>Mata Pelajaran</th><th>Guru</th><th>Kelas</th><th>Semester</th><th>Status</th><th>Aksi</th></tr></thead><tbody data-mapel-table><tr><td colspan="8">Data belum dimuat.</td></tr></tbody></table></div>
+</section>
+<div class="modal" data-modal hidden><div class="modal-card"><div class="modal-header"><div><h2 data-modal-title>Tambah Mata Pelajaran</h2><p class="muted">Kode mapel harus unik agar mudah dipakai di jadwal dan nilai.</p></div><button class="icon-button" type="button" data-close-modal>×</button></div>
+<form data-mapel-form><input type="hidden" name="id"/><input type="hidden" name="action" value="create"/><div class="form-grid">
+<div class="form-group"><label>Kode Mapel</label><input class="form-control" name="kode_mapel" placeholder="PWEB-XII" required/></div>
+<div class="form-group"><label>Nama Mapel</label><input class="form-control" name="nama_mapel" placeholder="Pemrograman Web" required/></div>
+<div class="form-group"><label>Guru Pengajar</label><select class="form-control" name="guru_id" data-guru-options required><option value="">Pilih guru</option></select></div>
+<div class="form-group"><label>Kelas</label><select class="form-control" name="kelas_id" data-kelas-options required><option value="">Pilih kelas</option></select></div>
+<div class="form-group"><label>Semester</label><select class="form-control" name="semester" required><option value="Ganjil">Ganjil</option><option value="Genap">Genap</option></select></div>
+<div class="form-group"><label>Status</label><select class="form-control" name="status"><option value="active">Aktif</option><option value="inactive">Nonaktif</option></select></div>
+</div><div class="modal-actions"><button class="btn btn-secondary" type="button" data-close-modal>Batal</button><button class="btn btn-primary btn-auto" type="submit" data-save-button>Simpan</button></div></form></div></div>
+    </main>
+  </div>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/mapel.js"></script>
+</body>
+</html>

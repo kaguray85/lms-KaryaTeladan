@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Guru - LMS SMK Karya Teladan</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body data-role="admin" data-page="admin-guru">
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="brand">LMS Karya Teladan</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="guru.html" class="active">Data Guru</a>
+        <a href="murid.html" class="">Data Murid</a>
+        <a href="kelas.html">Kelas</a>
+        <a href="mapel.html">Mata Pelajaran</a>
+        <a href="jadwal.html">Jadwal</a>
+        <a href="presensi.html">Presensi</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="materi.html">Materi</a>
+        <a href="pengumuman.html">Pengumuman</a>
+        <a href="profil.html">Profil</a>
+        <button type="button" data-logout>Logout</button>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <h1>Data Guru</h1>
+          <p>Kelola akun guru dan profil guru secara tersinkron dengan tabel users.</p>
+        </div>
+        <strong data-user-name>Memuat...</strong>
+      </header>
+
+      <section class="panel">
+        <div class="section-header">
+          <div>
+            <h2>Daftar Guru</h2>
+            <p class="muted">Tambah, edit, cari, dan nonaktifkan data guru.</p>
+          </div>
+          <button class="btn btn-primary btn-auto" type="button" data-open-create>+ Tambah Guru</button>
+        </div>
+
+        <div data-alert hidden></div>
+
+        <div class="toolbar">
+          <input class="form-control" type="search" placeholder="Cari nama, NIP, email, atau mapel..." data-search />
+          <select class="form-control" data-status-filter>
+            <option value="">Semua status</option>
+            <option value="active">Aktif</option>
+            <option value="inactive">Nonaktif</option>
+          </select>
+          <button class="btn btn-secondary" type="button" data-refresh>Refresh</button>
+        </div>
+
+        <p data-loading>Memuat data guru...</p>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Guru</th>
+                <th>NIP</th>
+                <th>Email</th>
+                <th>No HP</th>
+                <th>Mapel Utama</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody data-guru-table>
+              <tr><td colspan="8">Data belum dimuat.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" data-modal hidden>
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h2 data-modal-title>Tambah Guru</h2>
+          <p class="muted">Password wajib diisi saat tambah. Saat edit boleh dikosongkan.</p>
+        </div>
+        <button class="icon-button" type="button" data-close-modal aria-label="Tutup modal">×</button>
+      </div>
+
+      <form data-guru-form>
+        <input type="hidden" name="id" />
+        <input type="hidden" name="action" value="create" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nama Guru</label>
+            <input class="form-control" type="text" name="nama_guru" required />
+          </div>
+          <div class="form-group">
+            <label>NIP</label>
+            <input class="form-control" type="text" name="nip" required />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input class="form-control" type="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" type="password" name="password" data-password-field autocomplete="new-password" />
+          </div>
+          <div class="form-group">
+            <label>No HP</label>
+            <input class="form-control" type="text" name="no_hp" />
+          </div>
+          <div class="form-group">
+            <label>Mata Pelajaran Utama</label>
+            <input class="form-control" type="text" name="mata_pelajaran_utama" />
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status">
+              <option value="active">Aktif</option>
+              <option value="inactive">Nonaktif</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-secondary" type="button" data-close-modal>Batal</button>
+          <button class="btn btn-primary btn-auto" type="submit" data-save-button>Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/auth.js"></script>
+  <script src="../assets/js/guru.js"></script>
+</body>
+</html>
