@@ -43,10 +43,9 @@ document.addEventListener('DOMContentLoaded', async()=>{
   if(!['guru-jadwal','murid-jadwal'].includes(document.body.dataset.page)) return;
   if(window.authReady) await window.authReady;
   const role=document.body.dataset.role; const tbody=document.querySelector('[data-table]');
-  function jadwalEndpoint(){const params=new URLSearchParams(); const kelas=document.querySelector('[data-kelas-filter]')?.value||''; const mapel=document.querySelector('[data-mapel-filter]')?.value||''; if(role==='guru'&&kelas)params.set('kelas_id',kelas); if(role==='guru'&&mapel)params.set('mapel_id',mapel); const query=params.toString(); return `/${role}/jadwal.php${query?`?${query}`:''}`;}
-  async function load(){try{const data=await loadData(jadwalEndpoint()); if(!data.length){ renderEmpty(tbody,8,'Belum ada jadwal.'); return; } tbody.innerHTML=data.map((j,i)=>`<tr><td>${i+1}</td><td>${esc(j.hari)}</td><td>${esc(j.jam_mulai)}-${esc(j.jam_selesai)}</td><td>${esc(j.nama_kelas)}</td><td>${esc(j.nama_mapel)}</td><td>${esc(j.nama_guru)}</td><td>${esc(j.ruangan||'-')}</td><td>${badge(j.status,statusType(j.status))}</td></tr>`).join('');}catch(e){ alertPage(e.message||'Jadwal gagal dimuat.'); }}
-  async function initGuruFilters(){const kelasFilter=document.querySelector('[data-kelas-filter]'); const mapelFilter=document.querySelector('[data-mapel-filter]'); try{const [kelas,mapel]=await Promise.all([loadData('/guru/options.php?type=kelas'),loadData('/guru/options.php?type=mapel')]); if(kelasFilter)kelasFilter.innerHTML='<option value="">Semua kelas</option>'+kelas.map(k=>`<option value="${k.id}">${esc(k.nama_kelas)} - ${esc(k.jurusan)}</option>`).join(''); if(mapelFilter)mapelFilter.innerHTML='<option value="">Semua mapel</option>'+mapel.map(m=>`<option value="${m.id}">${esc(m.nama_mapel)} | ${esc(m.nama_kelas)}</option>`).join('');}catch(e){} kelasFilter?.addEventListener('change',load); mapelFilter?.addEventListener('change',load);}
-  if(role==='guru') await initGuruFilters();
-  load();
-  document.querySelector('[data-refresh]')?.addEventListener('click',load);
+  try{
+    const data=await loadData(`/${role}/jadwal.php`);
+    if(!data.length){ renderEmpty(tbody,8,'Belum ada jadwal.'); return; }
+    tbody.innerHTML=data.map((j,i)=>`<tr><td>${i+1}</td><td>${esc(j.hari)}</td><td>${esc(j.jam_mulai)}-${esc(j.jam_selesai)}</td><td>${esc(j.nama_kelas)}</td><td>${esc(j.nama_mapel)}</td><td>${esc(j.nama_guru)}</td><td>${esc(j.ruangan||'-')}</td><td>${badge(j.status,statusType(j.status))}</td></tr>`).join('');
+  }catch(e){ alertPage(e.message||'Jadwal gagal dimuat.'); }
 });
