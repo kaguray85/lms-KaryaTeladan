@@ -6,10 +6,26 @@ class Kelas
         $where = [];
         $params = [];
 
-        $search = $filters['search'] ?? '';
+        $search = trim((string) ($filters['search'] ?? ''));
         if ($search !== '') {
-            $where[] = '(k.nama_kelas LIKE :search OR k.jurusan LIKE :search OR k.tahun_ajaran LIKE :search OR g.nama_guru LIKE :search)';
-            $params[':search'] = '%' . $search . '%';
+            $terms = preg_split('/\s+/', $search) ?: [];
+            foreach ($terms as $index => $term) {
+                if ($term === '') {
+                    continue;
+                }
+
+                $key = ':search_' . $index;
+                $where[] = "(k.nama_kelas LIKE {$key}
+                    OR 'kelas' LIKE {$key}
+                    OR 'data kelas' LIKE {$key}
+                    OR k.jurusan LIKE {$key}
+                    OR k.tahun_ajaran LIKE {$key}
+                    OR k.jumlah_murid LIKE {$key}
+                    OR k.status LIKE {$key}
+                    OR CASE k.status WHEN 'active' THEN 'Aktif' ELSE 'Nonaktif' END LIKE {$key}
+                    OR g.nama_guru LIKE {$key})";
+                $params[$key] = '%' . $term . '%';
+            }
         }
 
         $status = $filters['status'] ?? '';

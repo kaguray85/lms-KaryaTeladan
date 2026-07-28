@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - LMS SMK Karya Teladan</title>
-  <link rel="stylesheet" href="assets/css/style.css?v=20260607-5" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260612-4" />
 </head>
 <body class="login-page" data-page="login">
   <section class="login-hero">
@@ -22,20 +22,33 @@
       <form data-login-form>
         <div class="form-group">
           <label for="email">Email</label>
-          <input class="form-control" type="email" id="email" name="email" placeholder="murid@gmail.com" required />
+          <input class="form-control" type="email" id="email" name="email" placeholder="email@gmail.com" required />
         </div>
 
         <div class="form-group">
           <label for="password">Password</label>
-          <input class="form-control" type="password" id="password" name="password" placeholder="Masukkan password" required />
+          <div class="password-field">
+            <input class="form-control" type="password" id="password" name="password" placeholder="Masukkan password" required />
+            <button class="password-toggle" type="button" data-password-toggle aria-label="Tampilkan password" aria-pressed="false">
+              <span aria-hidden="true">&#128065;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="recaptcha-wrapper">
+          <div class="g-recaptcha" data-sitekey="6LdplhstAAAAAEtjt-3oaWknLLd8n1mQGX7BZRKm"></div>
         </div>
 
         <button class="btn btn-primary" type="submit" data-login-button>Masuk</button>
+        <div class="forgot-password-row">
+          <a href="forgot-password.html">Lupa password?</a>
+        </div>
       </form>
     </section>
   </main>
 
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="assets/js/api.js"></script>
-  <script src="assets/js/auth.js"></script>
+  <script src="assets/js/auth.js?v=20260612-3"></script>
 </body>
 </html>

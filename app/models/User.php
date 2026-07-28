@@ -113,6 +113,15 @@ class User
         ]);
     }
 
+    public static function updatePassword(PDO $db, int $id, string $password): void
+    {
+        $statement = $db->prepare('UPDATE users SET password = :password, updated_at = NOW() WHERE id = :id');
+        $statement->execute([
+            ':id' => $id,
+            ':password' => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+    }
+
     public static function safeUser(array $user): array
     {
         unset($user['password']);

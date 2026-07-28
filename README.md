@@ -13,6 +13,7 @@ Project ini dibuat modular agar mudah dipahami pemula, tetapi tetap memakai pond
 - Database: MySQL
 - Database Access: PDO Prepared Statement
 - Authentication: PHP Session
+- Email: PHPMailer melalui SMTP
 - Server Lokal: XAMPP atau Laragon
 - Database Manager: phpMyAdmin
 
@@ -84,7 +85,21 @@ database/lms_smk_karya_teladan.sql
 database/seed.sql
 ```
 
-7. Buka project:
+7. Pasang PHPMailer dari folder project:
+
+```txt
+composer install
+```
+
+8. Salin `.env.example` menjadi `.env`, lalu isi konfigurasi database dan SMTP.
+
+9. Untuk database yang sudah pernah di-import, jalankan migrasi OTP:
+
+```txt
+database/password_reset_otps.sql
+```
+
+10. Buka project:
 
 ```txt
 http://localhost/lms-smk-karya-teladan/public/

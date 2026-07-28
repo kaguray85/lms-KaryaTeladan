@@ -50,6 +50,49 @@ a { color: inherit; text-decoration: none; }
   min-height: 100dvh;
 }
 
+/* Foto gedung asli dibuat cukup jelas dengan tint biru seperti referensi komposit. */
+.login-page[data-page="login"] .login-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1D4ED8, #2563EB 55%, #1E40AF);
+}
+
+.login-page[data-page="login"] .login-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  inset: -8px;
+  background: url("../img/SMK Karya Teladan.png") center / cover no-repeat;
+  opacity: 0.62;
+  filter: saturate(0.72) contrast(1.08);
+  transform: scale(1.02);
+}
+
+.login-page[data-page="login"] .login-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(29, 78, 216, 0.44), rgba(30, 64, 175, 0.58)),
+    radial-gradient(circle at center, rgba(37, 99, 235, 0.08), rgba(15, 23, 42, 0.16));
+}
+
+.login-page[data-page="login"] .login-hero-logo,
+.login-page[data-page="login"] .login-hero h1 {
+  position: relative;
+  z-index: 1;
+}
+
+.login-page[data-page="login"] .login-hero-logo {
+  filter: drop-shadow(0 12px 24px rgba(15, 23, 42, 0.28));
+}
+
+.login-page[data-page="login"] .login-hero h1 {
+  text-shadow: 0 4px 18px rgba(15, 23, 42, 0.45);
+}
+
 .login-hero-logo {
   width: min(220px, 60%);
   height: auto;
@@ -85,6 +128,11 @@ a { color: inherit; text-decoration: none; }
 .login-card h2 { margin: 0 0 8px; }
 .login-card .muted { margin: 0 0 28px; color: var(--text-light); }
 
+.recaptcha-wrapper {
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-weight: 700; margin-bottom: 8px; }
 .form-control {
@@ -96,6 +144,80 @@ a { color: inherit; text-decoration: none; }
   outline: none;
 }
 .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12); }
+.password-field {
+  position: relative;
+}
+.password-field .form-control {
+  padding-right: 52px;
+}
+.password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  transition: 0.2s ease;
+}
+.password-toggle:hover,
+.password-toggle:focus {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  outline: none;
+}
+.forgot-password-row {
+  margin-top: 12px;
+  text-align: right;
+}
+.forgot-password-row a {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+.forgot-password-row a:hover {
+  text-decoration: underline;
+}
+.auth-link-row {
+  margin-top: 20px;
+  text-align: center;
+}
+.auth-link-row a,
+.local-reset-link a {
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+}
+.auth-link-row a:hover,
+.local-reset-link a:hover {
+  text-decoration: underline;
+}
+.local-reset-link {
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid #BFDBFE;
+  border-radius: 12px;
+  background: #EFF6FF;
+  color: #1E3A8A;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.local-reset-link strong,
+.local-reset-link a {
+  display: block;
+}
+.local-reset-link a {
+  margin-top: 6px;
+}
 
 .btn {
   border: 0;
@@ -119,6 +241,13 @@ a { color: inherit; text-decoration: none; }
 .alert-error { background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
 .alert-success { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
 
+.otp-input {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 8px;
+  text-align: center;
+}
+
 .app-layout {
   min-height: 100vh;
   display: grid;
@@ -132,7 +261,23 @@ a { color: inherit; text-decoration: none; }
   color: #E2E8F0;
   padding: 24px;
 }
-.sidebar .brand { font-weight: 800; color: #fff; font-size: 20px; margin-bottom: 32px; }
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 32px;
+}
+.brand-logo {
+  width: 1.2em;
+  height: 1.2em;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+.brand-text { white-space: nowrap; }
 .nav { display: grid; gap: 8px; }
 .nav a, .nav button {
   background: transparent;

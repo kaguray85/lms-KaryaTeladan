@@ -1,4 +1,4 @@
-const APP_BASE = '/lms-smk-karya-teladan';
+const APP_BASE = '/lms-KaryaTeladan';
 const API_BASE = `${APP_BASE}/api`;
 
 async function apiRequest(endpoint, options = {}) {
