@@ -21,6 +21,35 @@ function setLoading(isLoading) {
   button.textContent = isLoading ? 'Memproses...' : 'Masuk';
 }
 
+function setupPasswordToggle() {
+  const passwordInput = document.querySelector('#password');
+  const toggleButton = document.querySelector('[data-password-toggle]');
+  if (!passwordInput || !toggleButton) return;
+
+  toggleButton.addEventListener('click', () => {
+    const isHidden = passwordInput.type === 'password';
+    passwordInput.type = isHidden ? 'text' : 'password';
+    toggleButton.setAttribute('aria-label', isHidden ? 'Sembunyikan password' : 'Tampilkan password');
+    toggleButton.setAttribute('aria-pressed', String(isHidden));
+  });
+}
+
+function getLoginRecaptchaToken() {
+  const token = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+
+  if (!token) {
+    throw new Error('Silakan centang reCAPTCHA sebelum login.');
+  }
+
+  return token;
+}
+
+function resetLoginRecaptcha() {
+  if (typeof grecaptcha !== 'undefined') {
+    grecaptcha.reset();
+  }
+}
+
 async function getCurrentUser() {
   const response = await apiRequest('/auth/me.php');
   return response.data;
@@ -138,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupResponsiveShell();
   setupThemePreference();
+  setupPasswordToggle();
 
   if (document.body.dataset.page === 'login') {
     redirectIfLoggedIn();
@@ -161,9 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = formData.get('password');
 
       try {
+        const recaptchaToken = getLoginRecaptchaToken();
         const response = await apiRequest('/auth/login.php', {
           method: 'POST',
-          body: { email, password },
+          body: { email, password, recaptcha_token: recaptchaToken },
         });
 
         showAlert(response.message, 'success');
@@ -171,6 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = ROLE_ROUTES[user.role] || `${APP_BASE}/public/login.html`;
       } catch (error) {
         showAlert(error.message || 'Login gagal.');
+        resetLoginRecaptcha();
       } finally {
         setLoading(false);
       }

@@ -6,10 +6,29 @@ class Mapel
         $where = [];
         $params = [];
 
-        $search = $filters['search'] ?? '';
+        $search = trim((string) ($filters['search'] ?? ''));
         if ($search !== '') {
-            $where[] = '(m.kode_mapel LIKE :search OR m.nama_mapel LIKE :search OR g.nama_guru LIKE :search OR k.nama_kelas LIKE :search)';
-            $params[':search'] = '%' . $search . '%';
+            $terms = preg_split('/\s+/', $search) ?: [];
+            foreach ($terms as $index => $term) {
+                if ($term === '') {
+                    continue;
+                }
+
+                $key = ':search_' . $index;
+                $where[] = "(m.kode_mapel LIKE {$key}
+                    OR 'mapel' LIKE {$key}
+                    OR 'mata pelajaran' LIKE {$key}
+                    OR 'kelas' LIKE {$key}
+                    OR m.nama_mapel LIKE {$key}
+                    OR m.semester LIKE {$key}
+                    OR m.status LIKE {$key}
+                    OR CASE m.status WHEN 'active' THEN 'Aktif' ELSE 'Nonaktif' END LIKE {$key}
+                    OR g.nama_guru LIKE {$key}
+                    OR k.nama_kelas LIKE {$key}
+                    OR k.jurusan LIKE {$key}
+                    OR k.tahun_ajaran LIKE {$key})";
+                $params[$key] = '%' . $term . '%';
+            }
         }
 
         $status = $filters['status'] ?? '';

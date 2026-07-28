@@ -6,10 +6,34 @@ class Jadwal
         $where = [];
         $params = [];
 
-        $search = $filters['search'] ?? '';
+        $search = trim((string) ($filters['search'] ?? ''));
         if ($search !== '') {
-            $where[] = '(j.hari LIKE :search OR j.ruangan LIKE :search OR k.nama_kelas LIKE :search OR mp.nama_mapel LIKE :search OR g.nama_guru LIKE :search)';
-            $params[':search'] = '%' . $search . '%';
+            $terms = preg_split('/\s+/', $search) ?: [];
+            foreach ($terms as $index => $term) {
+                if ($term === '') {
+                    continue;
+                }
+
+                $key = ':search_' . $index;
+                $where[] = "(j.hari LIKE {$key}
+                    OR 'jadwal' LIKE {$key}
+                    OR 'jadwal pelajaran' LIKE {$key}
+                    OR 'kelas' LIKE {$key}
+                    OR 'mapel' LIKE {$key}
+                    OR 'mata pelajaran' LIKE {$key}
+                    OR TIME_FORMAT(j.jam_mulai, '%H:%i') LIKE {$key}
+                    OR TIME_FORMAT(j.jam_selesai, '%H:%i') LIKE {$key}
+                    OR j.ruangan LIKE {$key}
+                    OR j.status LIKE {$key}
+                    OR CASE j.status WHEN 'active' THEN 'Aktif' ELSE 'Nonaktif' END LIKE {$key}
+                    OR k.nama_kelas LIKE {$key}
+                    OR k.jurusan LIKE {$key}
+                    OR mp.kode_mapel LIKE {$key}
+                    OR mp.nama_mapel LIKE {$key}
+                    OR mp.semester LIKE {$key}
+                    OR g.nama_guru LIKE {$key})";
+                $params[$key] = '%' . $term . '%';
+            }
         }
 
         $status = $filters['status'] ?? '';

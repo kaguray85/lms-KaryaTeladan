@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verifikasi OTP - LMS SMK Karya Teladan</title>
+  <link rel="stylesheet" href="assets/css/style.css?v=20260611-6" />
+</head>
+<body class="login-page" data-page="verify-otp">
+  <section class="login-hero">
+    <img class="login-hero-logo" src="assets/img/logo-KaryaTeladan-new.png" alt="Logo SMK Karya Teladan" />
+    <h1>LMS SMK Karya Teladan</h1>
+  </section>
+
+  <main class="login-panel">
+    <section class="login-card">
+      <h2>Verifikasi Kode OTP</h2>
+      <p class="muted">Masukkan 6 digit kode yang dikirim ke email Anda. Kode berlaku selama 5 menit.</p>
+
+      <div data-alert hidden></div>
+
+      <form data-verify-otp-form>
+        <div class="form-group">
+          <label for="otp">Kode OTP</label>
+          <input
+            class="form-control otp-input"
+            type="text"
+            id="otp"
+            name="otp"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            pattern="[0-9]{6}"
+            maxlength="6"
+            placeholder="000000"
+            required
+          />
+        </div>
+
+        <button class="btn btn-primary" type="submit" data-submit-button>Verifikasi OTP</button>
+      </form>
+
+      <div class="auth-link-row">
+        <a href="forgot-password.html">Kirim ulang kode OTP</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/password-reset.js?v=20260612-1"></script>
+</body>
+</html>

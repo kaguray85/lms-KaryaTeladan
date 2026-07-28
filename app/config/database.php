@@ -8,13 +8,14 @@ class Database
     public static function connection(): PDO
     {
         if (self::$connection === null) {
-            $host = 'localhost';
-            $database = 'lms_smk_karya_teladan';
-            $username = 'root';
-            $password = '';
-            $charset = 'utf8mb4';
+            $host = (string) env('DB_HOST', 'localhost');
+            $port = (string) env('DB_PORT', '3306');
+            $database = (string) env('DB_DATABASE', 'lms_smk_karya_teladan');
+            $username = (string) env('DB_USERNAME', 'root');
+            $password = (string) env('DB_PASSWORD', '');
+            $charset = (string) env('DB_CHARSET', 'utf8mb4');
 
-            $dsn = "mysql:host={$host};dbname={$database};charset={$charset}";
+            $dsn = "mysql:host={$host};port={$port};dbname={$database};charset={$charset}";
 
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
