@@ -7,7 +7,11 @@ require_once __DIR__ . '/env.php';
  */
 define('APP_NAME', 'LMS SMK Karya Teladan');
 define('APP_ENV', (string) env('APP_ENV', 'local'));
+<<<<<<< HEAD
 define('BASE_PATH', '/lms-KaryaTeladan');
+=======
+define('BASE_PATH', '/lms-smk-karya-teladan');
+>>>>>>> 902534478539cce8f4ad4bf0ca3248b7696311aa
 define('PUBLIC_PATH', BASE_PATH . '/public');
 define('MAX_UPLOAD_SIZE', 5 * 1024 * 1024); // 5MB
 define('PASSWORD_RESET_OTP_TTL_MINUTES', 5);
